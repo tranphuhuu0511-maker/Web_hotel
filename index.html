@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - Đặt Phòng Khách Sạn Sang Trọng</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-navy sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-hotel"></i> LuxStay
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hotels">Khách sạn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#destinations">Địa điểm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#promotions">Khuyến mãi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Liên hệ</a>
+                    </li>
+                    <li class="nav-item" id="navUser">
+                        <a class="nav-link" href="login.html" id="loginLink">
+                            <i class="fas fa-user"></i> Đăng nhập
+                        </a>
+                        <a class="nav-link d-none" href="#" id="userLink">
+                            <i class="fas fa-user-circle"></i> <span id="userName"></span>
+                        </a>
+                        <a class="nav-link d-none" href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                        </a>
+                    </li>
+                    <!-- cart icon removed -->
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="#" data-bs-toggle="offcanvas" data-bs-target="#favoritesOffcanvas">
+                            <i class="fas fa-heart"></i>
+                            <span class="badge bg-danger favorites-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Slideshow -->
+    <section class="hero-slider">
+        <div class="slider-container">
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600" alt="Luxury Hotel">
+                <div class="slide-content">
+                    <h1 class="slide-title">Trải Nghiệm Kỳ Nghỉ Sang Trọng</h1>
+                    <p class="slide-text">Khám phá những khách sạn đẳng cấp 5 sao với dịch vụ hoàn hảo</p>
+                    <a href="#search" class="btn btn-primary btn-lg">Đặt ngay</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600" alt="Beach Resort">
+                <div class="slide-content">
+                    <h1 class="slide-title">Resort Biển Tuyệt Đẹp</h1>
+                    <p class="slide-text">Thư giãn bên bờ biển xanh ngắt cùng ánh hoàng hôn lãng mạn</p>
+                    <a href="#search" class="btn btn-primary btn-lg">Khám phá</a>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1600" alt="Mountain Hotel">
+                <div class="slide-content">
+                    <h1 class="slide-title">Khách Sạn Núi Non Hùng Vĩ</h1>
+                    <p class="slide-text">Hòa mình vào thiên nhiên với view núi đồi tuyệt đẹp</p>
+                    <a href="#search" class="btn btn-primary btn-lg">Xem thêm</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Controls -->
+        <button class="slider-btn prev-btn" onclick="changeSlide(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider-btn next-btn" onclick="changeSlide(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Slider Dots -->
+        <div class="slider-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+    </section>
+
+    <!-- Promo Detail Modal -->
+    <div class="modal fade" id="promoModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="promoModalTitle">Chi tiết khuyến mãi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="promoModalBody">
+                    <!-- Filled by JS -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="promoApplyBtn">Áp dụng và tìm phòng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Bar -->
+    <section class="search-section" id="search">
+        <div class="container">
+            <div class="search-card">
+                <form id="searchForm" class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label">
+                            <i class="fas fa-map-marker-alt"></i> Địa điểm
+                        </label>
+                        <select class="form-select" id="location" required>
+                            <option value="">Chọn địa điểm</option>
+                            <option value="danang">Đà Nẵng</option>
+                            <option value="dalat">Đà Lạt</option>
+                            <option value="nhatrang">Nha Trang</option>
+                            <option value="hcm">TP. Hồ Chí Minh</option>
+                            <option value="hanoi">Hà Nội</option>
+                            <option value="phuquoc">Phú Quốc</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">
+                            <i class="fas fa-calendar-alt"></i> Nhận phòng
+                        </label>
+                        <input type="date" class="form-control" id="checkin" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">
+                            <i class="fas fa-calendar-alt"></i> Trả phòng
+                        </label>
+                        <input type="date" class="form-control" id="checkout" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">
+                            <i class="fas fa-user"></i> Số người
+                        </label>
+                        <input type="number" class="form-control" id="guests" min="1" max="10" value="2" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">
+                            <i class="fas fa-bed"></i> Loại phòng
+                        </label>
+                        <select class="form-select" id="roomType">
+                            <option value="">Tất cả</option>
+                            <option value="standard">Standard</option>
+                            <option value="deluxe">Deluxe</option>
+                            <option value="suite">Suite</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <label class="form-label d-block">&nbsp;</label>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <!-- Inline filters moved into search card -->
+                <div class="filter-bar mt-4">
+                    <div class="filter-item">
+                        <label>Giá:</label>
+                        <select id="priceFilter" class="form-select form-select-sm">
+                            <option value="">Tất cả</option>
+                            <option value="0-1000000">Dưới 1 triệu</option>
+                            <option value="1000000-2000000">1-2 triệu</option>
+                            <option value="2000000-5000000">2-5 triệu</option>
+                            <option value="5000000-999999999">Trên 5 triệu</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label>Số sao:</label>
+                        <select id="starFilter" class="form-select form-select-sm">
+                            <option value="">Tất cả</option>
+                            <option value="5">5 sao</option>
+                            <option value="4">4 sao</option>
+                            <option value="3">3 sao</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label>
+                            <input type="checkbox" id="poolFilter"> Hồ bơi
+                        </label>
+                    </div>
+                    <div class="filter-item">
+                        <label>
+                            <input type="checkbox" id="wifiFilter"> WiFi
+                        </label>
+                    </div>
+                    <div class="filter-item">
+                        <label>
+                            <input type="checkbox" id="buffetFilter"> Buffet
+                        </label>
+                    </div>
+                    <div class="filter-item">
+                        <label>
+                            <input type="checkbox" id="parkingFilter"> Bãi đỗ xe
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Hotels List -->
+<div class="toast-container"></div>
+    <section class="hotels-section" id="hotels">
+
+        <div class="container">
+            <h2 class="section-title">Khách Sạn Nổi Bật</h2>
+            <div class="row g-4" id="hotelsList">
+                <!-- Hotels will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations -->
+    <section class="destinations-section" id="destinations">
+        <div class="container">
+            <h2 class="section-title">Địa Điểm Phổ Biến</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="destination-card">
+                        <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800" alt="Đà Nẵng">
+                        <div class="destination-overlay">
+                            <h3>Đà Nẵng</h3>
+                            <p>120+ khách sạn</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="destination-card">
+                        <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=800" alt="Đà Lạt">
+                        <div class="destination-overlay">
+                            <h3>Đà Lạt</h3>
+                            <p>95+ khách sạn</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="destination-card">
+                        <img src="https://images.unsplash.com/photo-1580837119756-563d608dd119?w=800" alt="Nha Trang">
+                        <div class="destination-overlay">
+                            <h3>Nha Trang</h3>
+                            <p>150+ khách sạn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions -->
+    <section class="promotions-section" id="promotions">
+        <div class="container">
+            <h2 class="section-title">Khuyến Mãi Hot</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="promo-card">
+                        <div class="promo-badge">-30%</div>
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800" alt="Promo">
+                        <div class="promo-content">
+                                <h3>Giảm 30% Khách Sạn Biển</h3>
+                                <p>Áp dụng cho tất cả khách sạn view biển</p>
+                                <button class="btn btn-outline-primary promo-details" data-promo-code="BEACH30" data-discount="0.3" data-title="Giảm 30% Khách Sạn Biển" data-desc="Áp dụng cho tất cả khách sạn view biển">Xem chi tiết</button>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="promo-card">
+                        <div class="promo-badge">-50%</div>
+                        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800" alt="Promo">
+                        <div class="promo-content">
+                            <h3>Flash Sale Cuối Tuần</h3>
+                            <p>Giảm đến 50% cho booking từ 3 đêm</p>
+                            <button class="btn btn-outline-primary promo-apply" data-promo-code="WEEKEND50" data-discount="0.5" data-min-nights="3" data-title="Flash Sale Cuối Tuần" data-desc="Giảm đến 50% cho booking từ 3 đêm">Đặt ngay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h4><i class="fas fa-hotel"></i> LuxStay</h4>
+                    <p>Hệ thống đặt phòng khách sạn hàng đầu Việt Nam. Cam kết giá tốt nhất và dịch vụ chuyên nghiệp.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liên hệ</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> Hotline: 1900-xxxx</li>
+                        <li><i class="fas fa-envelope"></i> Email: info@luxstay.vn</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Địa chỉ: TP. Hồ Chí Minh</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Newsletter</h5>
+                    <p>Đăng ký nhận thông tin khuyến mãi</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="form-control" placeholder="Email của bạn">
+                        <button type="submit" class="btn btn-primary mt-2">Đăng ký</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2024 LuxStay. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="scroll-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    
+    <!-- Favorites Offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="favoritesOffcanvas" aria-labelledby="favoritesOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 id="favoritesOffcanvasLabel">Yêu thích</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="favoritesList" class="list-group"></div>
+            <div class="mt-3">
+                <button id="favoritesCheckoutBtn" class="btn btn-primary w-100">Thanh toán (tất cả)</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán - LuxStay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-navy">
+            <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-hotel"></i> LuxStay</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hotels">Khách sạn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#destinations">Địa điểm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#promotions">Khuyến mãi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Liên hệ</a>
+                    </li>
+                    <li class="nav-item" id="navUser">
+                        <a class="nav-link" href="login.html" id="loginLink">
+                            <i class="fas fa-user"></i> Đăng nhập
+                        </a>
+                        <a class="nav-link d-none" href="#" id="userLink">
+                            <i class="fas fa-user-circle"></i> <span id="userName"></span>
+                        </a>
+                        <a class="nav-link d-none" href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                        </a>
+                    </li>
+                    <!-- cart icon removed -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="checkout-section py-5">
+        <div class="container">
+            <h2 class="mb-4">Thanh Toán</h2>
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="card mb-4">
+                        <div class="card-header"><h5>Thông tin khách hàng</h5></div>
+                        <div class="card-body">
+                            <form id="checkoutForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Họ và tên *</label>
+                                        <input type="text" class="form-control" id="fullName" required>
+                                        <div class="invalid-feedback">Vui lòng nhập họ tên</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Email *</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                        <div class="invalid-feedback">Email không hợp lệ</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Số điện thoại *</label>
+                                        <input type="tel" class="form-control" id="phone" pattern="[0-9]{10}" required>
+                                        <div class="invalid-feedback">Số điện thoại phải có 10 chữ số</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Quốc tịch</label>
+                                        <select class="form-select" id="nationality">
+                                            <option>Việt Nam</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Yêu cầu đặc biệt</label>
+                                        <textarea class="form-control" id="notes" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header"><h5>Phương thức thanh toán</h5></div>
+                        <div class="card-body">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="radio" name="payment" id="creditCard" checked>
+                                <label class="form-check-label" for="creditCard">
+                                    <i class="fas fa-credit-card"></i> Thẻ tín dụng/Ghi nợ
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="radio" name="payment" id="bankTransfer">
+                                <label class="form-check-label" for="bankTransfer">
+                                    <i class="fas fa-university"></i> Chuyển khoản ngân hàng
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="radio" name="payment" id="momo">
+                                <label class="form-check-label" for="momo">
+                                    <i class="fas fa-wallet"></i> Ví MoMo
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment" id="payAtHotel">
+                                <label class="form-check-label" for="payAtHotel">
+                                    <i class="fas fa-money-bill"></i> Thanh toán tại khách sạn
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="card sticky-top">
+                        <div class="card-header"><h5>Chi tiết đơn hàng</h5></div>
+                        <div class="card-body">
+                            <div id="checkoutSummary"></div>
+                            <hr>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Tạm tính:</span>
+                                <span id="checkoutSubtotal">0₫</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Thuế & phí (10%):</span>
+                                <span id="checkoutTax">0₫</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between mb-4">
+                                <strong>Tổng cộng:</strong>
+                                <strong class="text-primary fs-4" id="checkoutTotal">0₫</strong>
+                            </div>
+                            <button type="submit" form="checkoutForm" class="btn btn-primary w-100 btn-lg">
+                                <i class="fas fa-lock"></i> Xác nhận đặt phòng
+                            </button>
+                            <div class="text-center mt-3">
+                                <small class="text-muted">
+                                    <i class="fas fa-shield-alt"></i> Thông tin của bạn được bảo mật
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="successModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-5">
+                    <i class="fas fa-check-circle text-success fa-5x mb-3"></i>
+                    <h3>Đặt phòng thành công!</h3>
+                    <p>Cảm ơn bạn đã đặt phòng tại LuxStay.</p>
+                    <p>Mã đơn hàng: <strong id="bookingCode"></strong></p>
+                    <p>Thông tin xác nhận đã được gửi đến email của bạn.</p>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Về trang chủ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
